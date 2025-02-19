@@ -5,6 +5,4 @@ bool isPalindrome(String text) {
 }
 
 String palindromeRes(String text) =>
-    isPalindrome(text)
-        ? "Yes, it's a Palindrome! 🎉"
-        : "No, it's not a Palindrome! ❌";
+    isPalindrome(text) ? "isPalindrome" : "not palindrome";
