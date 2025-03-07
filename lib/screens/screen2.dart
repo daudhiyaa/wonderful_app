@@ -5,6 +5,7 @@ import 'package:wonderful_app/components/button/button.dart';
 import 'package:wonderful_app/controller/user_controller.dart';
 import 'package:wonderful_app/routes/app_routes.dart';
 import 'package:wonderful_app/themes/colors.dart';
+import 'package:wonderful_app/utils/timer.dart';
 
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
@@ -15,7 +16,28 @@ class Screen2 extends StatefulWidget {
 
 class _Screen2State extends State<Screen2> {
   final userController = Get.find<UserController>();
+  final TimerManagerController timerController =
+      Get.find<TimerManagerController>();
   final usn = Get.arguments['usn'] as String;
+
+  int countdown = 10;
+
+  @override
+  void initState() {
+    super.initState();
+
+    timerController.createPeriodicTimer(Duration(seconds: 1), () {
+      if (countdown == 0) {
+        setState(() {
+          timerController.cancelAllTimers();
+        });
+      } else {
+        setState(() {
+          countdown--;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +62,70 @@ class _Screen2State extends State<Screen2> {
                 color: AppColors.textBlack,
               ),
             ),
+            SizedBox(height: 20),
+            if (countdown > 0)
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Flash Sale $countdown",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.info500,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 20),
+                    height: 200,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Container(
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             Spacer(),
             Center(
               child: Obx(

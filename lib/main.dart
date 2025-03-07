@@ -4,11 +4,13 @@ import 'package:wonderful_app/controller/user_controller.dart';
 import 'package:wonderful_app/routes/app_pages.dart';
 import 'package:wonderful_app/routes/app_routes.dart';
 import 'package:wonderful_app/themes/fonts.dart';
+import 'package:wonderful_app/utils/timer.dart';
 
 class AppBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(UserController());
+    Get.put(TimerManagerController());
   }
 }
 
